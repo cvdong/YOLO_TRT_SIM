@@ -25,6 +25,7 @@
 
 
 
+![](./workspace/result/zidane.jpg)
 REPO参考：[https://github.com/shouxieai/tensorRT_Pro](https://github.com/shouxieai/tensorRT_Pro)
 
 DULAO YYDS :heartpulse: 
