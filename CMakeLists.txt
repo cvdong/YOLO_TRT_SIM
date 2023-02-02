@@ -13,8 +13,8 @@ set(CUDA_GEN_CODE "-gencode=arch=compute_86,code=sm_86")
 
 set(OpenCV_DIR   "/usr/local/cuda")
 set(CUDA_DIR     "/usr/local/cuda-11.7")
-set(CUDNN_DIR    "/home/dafeng/Downloads/cudnn-linux-x86_64-8.3.3.40_cuda11.5-archive")
-set(TENSORRT_DIR "/home/dafeng/Downloads/TensorRT-8.4.1.5")
+set(CUDNN_DIR    "/home/Downloads/cudnn-linux-x86_64-8.3.3.40_cuda11.5-archive")
+set(TENSORRT_DIR "/home/Downloads/TensorRT-8.4.1.5")
 
 find_package(CUDA REQUIRED)
 find_package(OpenCV)
