@@ -3,7 +3,7 @@
  * @Author: 東DONG
  * @Mail: cv_yang@126.com
  * @Date: 2022-11-01 15:05:36
- * @LastEditTime: 2023-02-01 17:06:54
+ * @LastEditTime: 2023-02-03 11:02:02
  * @FilePath: /YOLO_TRT_SIM/src/main.cpp
  * @Description: 
  * Copyright (c) 2022 by ${東}, All Rights Reserved. 
@@ -180,7 +180,7 @@ namespace YOLO_TRT_SIM{
     }
 
 
-    // inference
+    // inference image
     static void inference_image(int deviceid, const string& engine_file, YOLO::Mode mode, YOLO::Type type, const string& model_name){
         // 创建推理引擎，同时初始化处理线程
         auto engine = YOLO::create_infer(engine_file, type, deviceid, 0.25f, 0.5f);
@@ -257,6 +257,60 @@ namespace YOLO_TRT_SIM{
         }
         engine.reset();
     }
+
+    // inference video
+    static void inference_video(int deviceid, const string& engine_file, YOLO::Mode mode, YOLO::Type type, const string& model_name){
+        // 创建推理引擎，同时初始化处理线程
+        auto engine = YOLO::create_infer(engine_file, type, deviceid, 0.25f, 0.5f);
+
+        if(engine == nullptr){
+            printf("Engine is nullptr\n");
+            return;
+        }
+
+        cv::Mat image;
+        cv::VideoCapture cap("vtest.avi");
+
+        while(cap.read(image)){
+
+            auto begin_timer = timestamp_now_float();
+            auto boxes_array = engine->commit(image); 
+          
+            // wait all result
+            auto boxes = boxes_array.get();
+
+            float infer_average_time = (timestamp_now_float() - begin_timer);
+            INFO("%s average: %.2f ms/image, fps: %.2f", engine_file.c_str(), infer_average_time, 1000 / infer_average_time);
+            
+            std::stringstream fpss;
+            fpss << "FPS:" << float(1000.0f / infer_average_time);
+
+            // 画框
+            for(auto& obj : boxes){
+                uint8_t b, g, r;
+                tie(b, g, r) = random_color(obj.class_label);    
+                cv::rectangle(image, cv::Point(obj.left, obj.top), cv::Point(obj.right, obj.bottom), cv::Scalar(b, g, r), 5);
+                auto name    = cocolabels[obj.class_label];
+                auto caption = cv::format("%s %.2f", name, obj.confidence);
+                int width    = cv::getTextSize(caption, 0, 1, 2, nullptr).width + 10;
+                cv::rectangle(image, cv::Point(obj.left-3, obj.top-33), cv::Point(obj.left + width, obj.top), cv::Scalar(b, g, r), -1);
+                cv::putText(image, caption, cv::Point(obj.left, obj.top-5), 0, 1, cv::Scalar::all(0), 2, 16);
+
+                cv::putText(image, fpss.str(), cv::Point(0, 25), 0, 1, cv::Scalar::all(0), 2, 16);
+
+                }
+
+            cv::imshow("test", image);
+            if(cv::waitKey(1) == 27) break;
+            
+        }
+
+        cap.release();
+        cv::destroyAllWindows();
+
+        engine.reset();
+           
+    }
     
     // test
     static void test(YOLO::Type type, YOLO::Mode mode, const string& model){
@@ -290,13 +344,14 @@ namespace YOLO_TRT_SIM{
             );
         }
         // 推理
-        inference_image(deviceid, model_file, mode, type, name);
+        // inference_image(deviceid, model_file, mode, type, name);
+        inference_video(deviceid, model_file, mode, type, name);
     }
     
 }
 
 int main(){
 
-    YOLO_TRT_SIM::test(YOLO::Type::V, YOLO::Mode::FP16, "yolov5s");
+    YOLO_TRT_SIM::test(YOLO::Type::V, YOLO::Mode::FP16, "yolov8s");
     return 0;
 }
