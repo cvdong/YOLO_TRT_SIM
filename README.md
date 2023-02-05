@@ -4,10 +4,12 @@
 
  该REPO功能描述：
 
-### 环境配置
+### MY ENVIRONMENT
 
-### PIPELINE
-
+- cuda 11.7
+- cudnn 8.4
+- opencv 4.6
+- tensorrt 8.4
 
 ### ONNX
 
