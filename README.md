@@ -23,13 +23,28 @@ pipeline: pt-->onnx-->engine
 
 YOLOV5 onnx:
 
-
+```
+https://github.com/ultralytics/yolov5
+python export.py --weights weights/yolov5s.pt --simplify
+```
+![](./workspace/yolov5s.png)
 
 YOLOV6 onnx:
+```
+https://github.com/meituan/YOLOv6
+python deploy/ONNX/export_onnx.py --weights weights/yolov6s.pt --simplify
+```
+![](./workspace/yolov6s.png)
 
 YOLOV7 onnx:
+```
+https://github.com/WongKinYiu/yolov7
+python export.py --weights weights/yolov7s.pt --grid --simplify 
+```
+![](./workspace/yolov7s.png)
 
 YOLOV8 onnx:
+
 
 ### Engine
 
