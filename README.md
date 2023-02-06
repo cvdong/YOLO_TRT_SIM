@@ -54,6 +54,10 @@ y = torch.cat((dbox, torch.ones(1, 1, 8400), cls.sigmoid()), 1)
 # 1 85 8400 --> 1 8400 85
 y = torch.transpose(y, 2, 1)
 
+exporter.py
+283行改成：
+output_names = ['output0', 'output1'] if isinstance(self.model, SegmentationModel) else ['outputs']
+
 export.py:
 from ultralytics import YOLO
 model = YOLO("weights/yolov8s.pt") 
@@ -76,11 +80,25 @@ trtexec --onnx=xxx.onnx --saveEngine=xxx.engine --fp16
 利用YOLO::compile 参数 mode 更改 FP32 FP16 int8, 具体看complie函数; int8 量化需要准备矫正数据集即可。
 
 ## 思考
+YOLO 目标检测速度和精度兼具，成为业界很多检测项目首选算法，因此一套高效的部署方案对于项目快速落地迭代至关必要。基于N卡的加速方案，最优的选择还是利用Nvidia TensorRT库对深度模型进行加速部署，另外利用CU核函数实现模型前后处理，模型整体速度会快速提升到一个理想的指标。
 
+popular lib: 
 
+[TensorRT](https://github.com/NVIDIA/TensorRT)
 
+[onnx-tensorrt](https://github.com/onnx/onnx-tensorrt)
+
+[tensorrtx](https://github.com/wang-xinyu/tensorrtx)
+
+[tensorRT_Pro](https://github.com/shouxieai/tensorRT_Pro)
+
+[tensorrtCV](https://github.com/wdhao/tensorrtCV)
+
+以上库可以进行认真学习，领悟。
 
 ![](./workspace/result/zidane.jpg)
+![](./workspace/result/car.jpg)
+
 REPO参考：[https://github.com/shouxieai/tensorRT_Pro](https://github.com/shouxieai/tensorRT_Pro)
 
 DULAO YYDS :heartpulse: 
