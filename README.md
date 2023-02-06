@@ -97,7 +97,6 @@ popular lib:
 以上库可以进行认真学习，领悟。
 
 ![](./workspace/result/zidane.jpg)
-![](./workspace/result/car.jpg)
 
 REPO参考：[https://github.com/shouxieai/tensorRT_Pro](https://github.com/shouxieai/tensorRT_Pro)
 
