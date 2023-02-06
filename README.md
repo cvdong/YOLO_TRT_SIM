@@ -9,7 +9,7 @@
  - 支持多路多线程并行推理；
  - 仅依赖opencv和tensorrt;
  - 支持YOLOV5 V6 V7 V8 推理；
- - 友好的封装格式，便于学习
+ - TRT模型加速，友好的封装格式，便于学习
 
 ### MY ENVIRONMENT
 
@@ -45,20 +45,37 @@ python export.py --weights weights/yolov7s.pt --grid --simplify
 
 YOLOV8 onnx:
 ```
+pip install ultralytics
 
+modules.py
+410行改成：
+# 1 84 8400 --> 1 85 8400
+y = torch.cat((dbox, torch.ones(1, 1, 8400), cls.sigmoid()), 1)
+# 1 85 8400 --> 1 8400 85
+y = torch.transpose(y, 2, 1)
 
+export.py:
+from ultralytics import YOLO
+model = YOLO("weights/yolov8s.pt") 
+success = model.export(mode='export',format="onnx", opset=16, simplify=True) 
+
+python export.py
 ```
 ![](./workspace/yolov8s_onnx_cut.png)
 
 ### Engine
+onnx 生成 engine 有两种常用方案：
 
+其一：command
+```
+trtexec --onnx=xxx.onnx --saveEngine=xxx.engine --fp32
+trtexec --onnx=xxx.onnx --saveEngine=xxx.engine --fp16
+```
+其二：本PROJECT
 
-### 教程
+利用YOLO::compile 参数 mode 更改 FP32 FP16 int8, 具体看complie函数; int8 量化需要准备矫正数据集即可。
 
-
-
-
-## 个人思考： 
+## 思考
 
 
 
