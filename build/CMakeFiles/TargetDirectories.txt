@@ -1,5 +1,0 @@
-/home/dafeng/YOLO_TRT_SIM/build/CMakeFiles/rebuild_cache.dir
-/home/dafeng/YOLO_TRT_SIM/build/CMakeFiles/edit_cache.dir
-/home/dafeng/YOLO_TRT_SIM/build/CMakeFiles/run.dir
-/home/dafeng/YOLO_TRT_SIM/build/CMakeFiles/yolo.dir
-/home/dafeng/YOLO_TRT_SIM/build/CMakeFiles/cucodes.dir
