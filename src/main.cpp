@@ -3,7 +3,7 @@
  * @Author: 東DONG
  * @Mail: cv_yang@126.com
  * @Date: 2022-11-01 15:05:36
- * @LastEditTime: 2023-02-03 11:02:02
+ * @LastEditTime: 2023-02-20 17:44:59
  * @FilePath: /YOLO_TRT_SIM/src/main.cpp
  * @Description: 
  * Copyright (c) 2022 by ${東}, All Rights Reserved. 
@@ -344,14 +344,14 @@ namespace YOLO_TRT_SIM{
             );
         }
         // 推理
-        // inference_image(deviceid, model_file, mode, type, name);
-        inference_video(deviceid, model_file, mode, type, name);
+        inference_image(deviceid, model_file, mode, type, name);
+        // inference_video(deviceid, model_file, mode, type, name);
     }
     
 }
 
 int main(){
-
-    YOLO_TRT_SIM::test(YOLO::Type::V, YOLO::Mode::FP16, "yolov8s");
+   //X V E 
+    YOLO_TRT_SIM::test(YOLO::Type::E, YOLO::Mode::FP16, "edgeyolo");
     return 0;
 }

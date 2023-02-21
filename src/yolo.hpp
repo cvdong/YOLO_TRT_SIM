@@ -3,7 +3,7 @@
  * @Author: 東DONG
  * @Mail: cv_yang@126.com
  * @Date: 2022-11-01 15:05:36
- * @LastEditTime: 2023-02-01 17:10:31
+ * @LastEditTime: 2023-02-20 17:22:41
  * @FilePath: /YOLO_TRT_SIM/src/yolo.hpp
  * @Description: 
  * Copyright (c) 2022 by ${東}, All Rights Reserved. 
@@ -49,6 +49,7 @@ namespace YOLO{
     enum class Type : int{
         V  = 0,
         X  = 1,
+        E  = 2,
     };
 
     enum class Mode : int {

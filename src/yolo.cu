@@ -3,7 +3,7 @@
  * @Author: 東DONG
  * @Mail: cv_yang@126.com
  * @Date: 2022-11-01 15:05:36
- * @LastEditTime: 2023-02-01 17:10:17
+ * @LastEditTime: 2023-02-20 17:44:22
  * @FilePath: /YOLO_TRT_SIM/src/yolo.cu
  * @Description: 
  * Copyright (c) 2022 by ${東}, All Rights Reserved. 
@@ -1820,6 +1820,7 @@ namespace YOLO{
         switch(type){
         case Type::V: return "YoloV";
         case Type::X: return "YoloX";
+        case Type::E: return "Edgeyolo";
         default: return "Unknow";
         }
     }
@@ -1864,11 +1865,17 @@ namespace YOLO{
 
             if(type == Type::V){
                 normalize_ = Norm::alpha_beta(1 / 255.0f, 0.0f, ChannelType::SwapRB);
+                
             }else if(type == Type::X){
                 //float mean[] = {0.485, 0.456, 0.406};
                 //float std[]  = {0.229, 0.224, 0.225};
                 //normalize_ = Norm::mean_std(mean, std, 1/255.0f, ChannelType::Invert);
                 normalize_ = Norm::None();
+
+            }else if(type==Type::E){
+
+                normalize_ = Norm::None();
+            
             }else{
                 INFOE("Unsupport type %d", type);
             }
@@ -2045,6 +2052,11 @@ namespace YOLO{
         if(type == Type::V){
             normalize = Norm::alpha_beta(1 / 255.0f, 0.0f, ChannelType::SwapRB);
         }else if(type == Type::X){
+            //float mean[] = {0.485, 0.456, 0.406};
+            //float std[]  = {0.229, 0.224, 0.225};
+            //normalize_ = CUDAKernel::Norm::mean_std(mean, std, 1/255.0f, CUDAKernel::ChannelType::Invert);
+            normalize = Norm::None();
+        }else if(type == Type::E){
             //float mean[] = {0.485, 0.456, 0.406};
             //float std[]  = {0.229, 0.224, 0.225};
             //normalize_ = CUDAKernel::Norm::mean_std(mean, std, 1/255.0f, CUDAKernel::ChannelType::Invert);
