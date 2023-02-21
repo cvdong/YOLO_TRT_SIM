@@ -1,6 +1,6 @@
 # YOLO_TRT_SIM
 
- 一套代码同时支持 V5,V6,V7,V8 TRT推理 ™️，前后处理均由CUDA核函数实现 :rocket:
+ 一套代码同时支持 X,V5,V6,V7,V8, EdgeYOLO TRT推理 ™️，前后处理均由CUDA核函数实现 :rocket:
 
  该REPO功能描述：
  - 支持onnx转TRT FP32 FP16 INT8 engine;
@@ -8,7 +8,7 @@
  - 支持image和video 推理；
  - 支持多路多线程并行推理；
  - 仅依赖opencv和tensorrt;
- - 支持YOLOV5 V6 V7 V8 推理；
+ - 支持YOLO X V5 V6 V7 V8 EdgeYOLO 推理；
  - TRT模型加速，友好的封装格式，便于学习
 
 ### MY ENVIRONMENT
@@ -66,6 +66,15 @@ success = model.export(mode='export',format="onnx", opset=16, simplify=True)
 python export.py
 ```
 ![](./workspace/yolov8s_onnx_cut.png)
+
+
+EdgeYOLO:
+```
+
+
+```
+
+
 
 ### Engine
 onnx 生成 engine 有两种常用方案：
