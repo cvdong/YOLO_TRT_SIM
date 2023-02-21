@@ -14,8 +14,8 @@
 
 ## UPDATE
 
-2023.2.21 支持 EdgeYOLO 部署；
-2023.2.1  支持 X V5 V6 V7 V8 部署;
+- 2023.2.21 支持 EdgeYOLO 部署；
+- 2023.2.1  支持 X V5 V6 V7 V8 部署;
 
 ### MY ENVIRONMENT
 

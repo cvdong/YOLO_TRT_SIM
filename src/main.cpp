@@ -352,6 +352,8 @@ namespace YOLO_TRT_SIM{
 
 int main(){
    //X V E 
+    // YOLO_TRT_SIM::test(YOLO::Type::X, YOLO::Mode::FP16, "yoloxs");
     YOLO_TRT_SIM::test(YOLO::Type::E, YOLO::Mode::FP16, "edgeyolo");
+    // YOLO_TRT_SIM::test(YOLO::Type::V, YOLO::Mode::FP16, "yolov8s");
     return 0;
 }
