@@ -11,6 +11,12 @@
  - 支持YOLO X V5 V6 V7 V8 EdgeYOLO 推理；
  - TRT模型加速，友好的封装格式，便于学习
 
+
+## UPDATE
+
+2023.2.21 支持 EdgeYOLO 部署；
+2023.2.1  支持 X V5 V6 V7 V8 部署;
+
 ### MY ENVIRONMENT
 
 - cuda 11.7
@@ -70,11 +76,16 @@ python export.py
 
 EdgeYOLO:
 ```
-
-
+https://github.com/LSH9832/edgeyolo.git
+python export.py --onnx                 # 没有安装tensorrt和torch2trt，用--onnx-only代替
+                 --weights edgeyolo_coco.pth 
+                 --input-size 640 640   # 宽、高
+                 --batch 1
+                 --opset 11
+                 --no-simplify          # 不简化模型
 ```
 
-
+![](./workspace/edgeyolos_onnx_cut.png)
 
 ### Engine
 onnx 生成 engine 有两种常用方案：
