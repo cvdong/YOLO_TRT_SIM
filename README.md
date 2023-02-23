@@ -1,6 +1,6 @@
 # YOLO_TRT_SIM
 
- 一套代码同时支持 X,V5,V6,V7,V8, EdgeYOLO TRT推理 ™️，前后处理均由CUDA核函数实现 :rocket:
+ 一套代码同时支持 X,V3,V4,V5,V6,V7,V8, EdgeYOLO TRT推理 ™️，前后处理均由CUDA核函数实现 :rocket:
 
  该REPO功能描述：
  - 支持onnx转TRT FP32 FP16 INT8 engine;
